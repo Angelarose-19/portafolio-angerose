@@ -1,13 +1,41 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>PortafolioAngerose</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+<html lang="es" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ange Rose | Desarrolladora Web</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Portafolio de Ange Rose, desarrolladora web. Código, diseño y mucha pasión por la tecnología."
+    />
+    <meta name="theme-color" content="#12061f" />
+        <script>
+      try {
+        if (localStorage.getItem('angerose-theme') === 'light') {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    </script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Fuentes principales: se cargan antes para evitar saltos de texto -->
+    <link
+      rel="preload"
+      href="/fonts/quicksand-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/dancing-script-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

@@ -1,0 +1,203 @@
+<ng-template #icono let-nombre>
+  <svg
+    class="size-6 shrink-0"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    @switch (nombre) {
+      @case ('estudio') {
+        <path
+          d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"
+        />
+        <path d="M22 10v6" />
+        <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+      }
+      @case ('trabajo') {
+        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        <rect width="20" height="14" x="2" y="6" rx="2" />
+      }
+      @case ('premio') {
+        <path
+          d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"
+        />
+        <circle cx="12" cy="8" r="6" />
+      }
+    }
+  </svg>
+</ng-template>
+
+<section
+  id="sobre-mi"
+  class="relative overflow-hidden bg-linear-to-b from-night-950 via-night-900 to-night-800 px-4 py-24 sm:px-8"
+>
+  <div class="mx-auto max-w-7xl">
+    <!-- Título -->
+    <h2 class="font-display text-6xl text-neon-400 sm:text-7xl" data-reveal>
+      Sobre mí <span class="text-4xl text-neon-300" aria-hidden="true">✦</span>
+    </h2>
+    <span class="mt-2 block h-0.5 w-28 rounded-full bg-neon-400/70" aria-hidden="true"></span>
+
+    <div class="mt-12 grid items-start gap-10 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-14">
+      <!-- ============ Muñeca + CV ============ -->
+      <div class="flex flex-col items-center gap-6" data-reveal>
+        <div class="relative w-full max-w-[260px]">
+          <img
+            class="muneca-paz w-full"
+            src="images/muneca/paz.webp"
+            alt="Ange Rose guiñando un ojo y haciendo el signo de paz"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            class="brillo b1"
+            src="images/efectos/destello-1.webp"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+          />
+          <img
+            class="brillo b2"
+            src="images/efectos/destello-3.webp"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+          />
+        </div>
+
+        <a
+          [href]="cvUrl"
+          download
+          class="btn-cv inline-flex items-center gap-2 rounded-full bg-neon-400 px-7 py-3 font-semibold text-night-950 shadow-lg shadow-neon-500/30 transition hover:bg-neon-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neon-300"
+        >
+          <svg
+            class="size-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3v12" />
+            <path d="m7 10 5 5 5-5" />
+            <path d="M5 21h14" />
+          </svg>
+          Descargar CV
+        </a>
+      </div>
+
+      <!-- ============ Nota + tarjetas ============ -->
+      <div class="space-y-8">
+        <!-- Nota adhesiva -->
+        <aside
+          class="max-w-3xl rotate-1 rounded-sm bg-neon-200 p-6 text-night-900 shadow-lg shadow-black/40 sm:p-8"
+          data-reveal
+        >
+          <p class="font-hand text-3xl font-bold">Un poco sobre mí… ♡</p>
+          <div class="mt-3 space-y-3 font-hand text-xl leading-snug sm:text-2xl">
+            <p>
+              Soy Angela Rosero, aunque por aquí me conocen como Ange. Soy Ingeniera de software y
+              me muevo sobre todo en el frontend: diseño y desarrollo interfaces claras, funcionales
+              y agradables de usar.
+            </p>
+            <p>
+              Trabajo con Angular, React y Tailwind CSS, y he usado Figma, Bubble y Webflow para
+              prototipar. También tengo conocimientos de backend con Node.js, Python y SQL, y pruebo
+              APIs con Postman, lo que me ayuda a entender el proyecto completo y no solo mi parte.
+            </p>
+            <p>
+              Estoy culminando ya mis estudios y he trabajado en equipos con
+              metodologías ágiles (Scrum y Kanban). Me motiva aprender algo nuevo cada día y crear
+              productos que, además de funcionar bien, se sientan bonitos e intuitivos para el usuario. ♡
+            </p>
+          </div>
+        </aside>
+
+        <!-- Tarjetas -->
+        <div class="grid gap-5 md:grid-cols-3">
+          <article class="tarjeta" data-reveal style="--i: 0">
+            <div class="cabecera flex items-center gap-3 text-neon-400">
+              <ng-container *ngTemplateOutlet="icono; context: { $implicit: 'estudio' }" />
+              <h3 class="text-lg font-bold text-neon-200">Estudio</h3>
+            </div>
+            <p class="mt-3 font-semibold text-neon-200">Ingeniería de Software</p>
+            <p class="text-sm text-neon-200/80">
+              Corporación Tecnológica del Oriente · 
+            </p>
+            <p class="mt-3 font-semibold text-neon-200">Tecnólogo en Análisis y Desarrollo de Software</p>
+            <p class="text-sm text-neon-200/80">SENA</p>
+          </article>
+
+          <article class="tarjeta" data-reveal style="--i: 1">
+            <div class="cabecera flex items-center gap-3 text-neon-400">
+              <ng-container *ngTemplateOutlet="icono; context: { $implicit: 'trabajo' }" />
+              <h3 class="text-lg font-bold text-neon-200">Experiencia</h3>
+            </div>
+            <p class="mt-3 font-semibold text-neon-200">Desarrolladora Frontend</p>
+            <p class="text-sm text-neon-200/80">Double V Partners · feb – ago 2025</p>
+            <p class="mt-3 text-sm text-neon-200/90">
+              Angular, React, Bubble, Webflow, Figma, Postman y equipos ágiles con Scrum, Kanban y
+              Jira.
+            </p>
+          </article>
+
+          <article class="tarjeta" data-reveal style="--i: 2">
+            <div class="cabecera flex items-center gap-3 text-neon-400">
+              <ng-container *ngTemplateOutlet="icono; context: { $implicit: 'premio' }" />
+              <h3 class="text-lg font-bold text-neon-200">Certificaciones</h3>
+            </div>
+            <ul class="mt-3 space-y-2 text-sm text-neon-200/90">
+              @for (cert of certificaciones; track cert) {
+                <li class="flex gap-2">
+                  <span class="text-neon-400" aria-hidden="true">♡</span>
+                  {{ cert }}
+                </li>
+              }
+            </ul>
+          </article>
+        </div>
+
+        <!-- Sigo aprendiendo -->
+        <div class="flex flex-wrap items-center gap-3" data-reveal>
+          <p class="font-hand text-3xl text-neon-300">Sigo aprendiendo ✦</p>
+          @for (tema of aprendiendo; track tema) {
+           <span class="chip">{{ tema }}</span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Línea de tiempo ============ -->
+    <div class="mt-20">
+      <h3 class="font-display text-5xl text-neon-400" data-reveal>Mi camino ♡</h3>
+
+      <ol class="linea">
+        @for (hito of hitos; track hito.titulo + hito.fecha) {
+          <li class="hito" data-reveal [style.--i]="$index">
+            <img
+              class="nodo"
+              [src]="hito.futuro ? 'images/efectos/corazon-contorno.webp' : 'images/efectos/corazon.webp'"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+            <div class="hito-card">
+              <span class="etiqueta" [class.etiqueta-trabajo]="hito.tipo === 'trabajo'">
+                {{ hito.tipo === 'estudio' ? 'Estudio' : 'Trabajo' }}
+              </span>
+              <p class="mt-2 text-sm font-bold text-neon-400">{{ hito.fecha }}</p>
+              <h4 class="mt-1 font-semibold leading-snug text-neon-200">{{ hito.titulo }}</h4>
+              <p class="mt-1 text-sm text-neon-200/75">{{ hito.lugar }}</p>
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+  </div>
+</section>

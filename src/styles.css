@@ -1,1 +1,88 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/* El modo oscuro se activa con la clase "dark" en <html>.
+   El modo claro lo diseñamos al final. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Fuentes (servidas desde public/fonts) ---------- */
+@font-face {
+  font-family: "Quicksand";
+  src: url("/fonts/quicksand-latin-wght-normal.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dancing Script";
+  src: url("/fonts/dancing-script-latin-wght-normal.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Caveat";
+  src: url("/fonts/caveat-latin-wght-normal.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tema ---------- */
+@theme {
+  /* Fuentes: clases font-sans, font-display y font-hand */
+  --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Dancing Script", cursive;
+  --font-hand: "Caveat", cursive;
+
+  /* Morados de noche (fondos) */
+  --color-night-950: #12061f;
+  --color-night-900: #1a0b2e;
+  --color-night-800: #25103f;
+  --color-night-700: #35165a;
+
+  /* Violeta (bordes, brillos suaves) */
+  --color-violet-500: #7b3fc4;
+  --color-violet-400: #9b5de5;
+
+  /* Vino tinto (suéter de la muñeca) */
+  --color-wine-800: #5c1229;
+  --color-wine-700: #7a1735;
+  --color-wine-600: #8b1a3a;
+
+  /* Rosa neón (acentos, botones, brillos) */
+  --color-neon-500: #ff4fb0;
+  --color-neon-400: #ff7ac8;
+  --color-neon-300: #ffa6dc;
+  --color-neon-200: #ffd1ee;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-night-950);
+  color: var(--color-neon-200);
+  overflow-x: hidden;
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

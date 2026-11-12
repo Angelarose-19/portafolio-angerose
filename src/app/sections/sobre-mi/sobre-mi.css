@@ -1,0 +1,280 @@
+/* ---------- Aparecer al hacer scroll ---------- */
+/* Solo se oculta si el JavaScript está activo (clase puesta desde sobre-mi.ts). */
+:host(.js-reveal) [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+:host(.js-reveal) [data-reveal].visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Tarjetas ---------- */
+.tarjeta {
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--color-neon-400) 55%, transparent);
+  border-radius: 1.5rem;
+  background: color-mix(in srgb, var(--color-night-900) 80%, transparent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--color-neon-500) 12%, transparent);
+}
+
+/* ---------- Destellos junto a la muñeca ---------- */
+.brillo {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  animation: titilar 3.6s ease-in-out infinite;
+}
+
+.b1 {
+  left: -4%;
+  top: 8%;
+  width: 14%;
+}
+
+.b2 {
+  right: -2%;
+  top: 30%;
+  width: 11%;
+  animation-delay: 1.4s;
+}
+
+@keyframes titilar {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* ---------- Línea de tiempo (móvil: vertical) ---------- */
+.linea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-left: 2.75rem;
+  list-style: none;
+}
+
+.linea::before {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 1.05rem;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-neon-400), var(--color-violet-400));
+  opacity: 0.6;
+}
+
+.hito {
+  position: relative;
+}
+
+.nodo {
+  position: absolute;
+  top: 0.9rem;
+  left: -2.75rem;
+  width: 2.1rem;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.hito-card {
+  padding: 1rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--color-neon-400) 40%, transparent);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--color-night-900) 80%, transparent);
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 0.1rem 0.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-violet-400) 30%, transparent);
+  color: var(--color-neon-200);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.etiqueta-trabajo {
+  background: color-mix(in srgb, var(--color-neon-500) 30%, transparent);
+}
+
+/* ---------- Línea de tiempo (escritorio ancho: horizontal) ---------- */
+@media (min-width: 1280px) {
+  .linea {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 1rem;
+    padding-top: 3rem;
+    padding-left: 0;
+  }
+
+  .linea::before {
+    top: 1.45rem;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 2px;
+    background: linear-gradient(to right, var(--color-neon-400), var(--color-violet-400));
+  }
+
+  .nodo {
+    top: -2.45rem;
+    left: 0.4rem;
+    width: 1.9rem;
+  }
+}
+
+/* =====================================================================
+   Animaciones al pasar el puntero (o enfocar con teclado)
+   ===================================================================== */
+
+/* ---------- Tarjetas: el ícono salta y el borde brilla ---------- */
+.tarjeta {
+  position: relative;
+}
+
+/* El brillo va en un pseudo-elemento porque la tarjeta ya usa la animación de aparecer */
+.tarjeta::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--color-neon-400);
+  border-radius: inherit;
+  box-shadow: 0 0 28px color-mix(in srgb, var(--color-neon-500) 40%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.tarjeta:hover::after,
+.tarjeta:focus-within::after {
+  opacity: 1;
+}
+
+.cabecera svg {
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.3s ease;
+}
+
+.tarjeta:hover .cabecera svg {
+  transform: translateY(-0.4rem) rotate(-8deg) scale(1.2);
+  filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--color-neon-500) 60%, transparent));
+}
+
+/* ---------- Chips "Sigo aprendiendo" ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-neon-400) 60%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-night-900) 60%, transparent);
+  color: var(--color-neon-200);
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.2s ease;
+}
+
+.chip:hover {
+  transform: translateY(-3px) scale(1.06);
+  background: color-mix(in srgb, var(--color-neon-500) 25%, transparent);
+}
+
+.chip:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
+/* ---------- Muñeca: un pequeño balanceo ---------- */
+.muneca-paz {
+  transform-origin: 50% 100%;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.muneca-paz:hover {
+  transform: rotate(-2.5deg) scale(1.03);
+}
+
+/* ---------- Botón del CV: la flecha rebota ---------- */
+.btn-cv svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-cv:hover svg,
+.btn-cv:focus-visible svg {
+  animation: rebote 0.6s ease infinite;
+}
+
+@keyframes rebote {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* ---------- Línea de tiempo ---------- */
+.hito-card {
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.hito:hover .hito-card {
+  transform: translateY(-4px);
+  border-color: var(--color-neon-400);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-neon-500) 25%, transparent);
+}
+
+/* El corazón de la línea salta y late */
+.nodo {
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.3s ease;
+}
+
+.hito:hover .nodo {
+  transform: translateY(-5px) scale(1.25);
+  filter: drop-shadow(0 4px 8px color-mix(in srgb, var(--color-neon-500) 70%, transparent));
+  animation: latido 0.8s ease-in-out 0.3s infinite;
+}
+
+@keyframes latido {
+  0%,
+  100% {
+    transform: translateY(-5px) scale(1.25);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.4);
+  }
+}
+
+.etiqueta {
+  transition: transform 0.25s ease;
+}
+
+.hito:hover .etiqueta {
+  transform: scale(1.08);
+}

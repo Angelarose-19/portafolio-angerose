@@ -1,0 +1,99 @@
+.franja {
+  border: 2px dashed color-mix(in srgb, var(--color-neon-400) 60%, transparent);
+  border-radius: 1.5rem;
+  background: color-mix(in srgb, var(--color-night-900) 70%, transparent);
+}
+
+/* ---------- Vista previa ---------- */
+.vista {
+  position: relative;
+  flex: none;
+  width: 8.5rem;
+  height: 5.25rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-neon-400) 55%, transparent);
+  border-radius: 0.9rem;
+}
+
+.vista-fondo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vista-muneca {
+  position: absolute;
+  left: 14%;
+  bottom: 4%;
+  height: 62%;
+  width: auto;
+  animation: trotar 0.9s ease-in-out infinite;
+}
+
+.vista-corazon {
+  position: absolute;
+  right: 18%;
+  top: 14%;
+  width: 22%;
+  height: auto;
+  animation: flotar 2.4s ease-in-out infinite;
+}
+
+@keyframes trotar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes flotar {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.12);
+  }
+}
+
+/* ---------- Botón ---------- */
+.jugar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  background: var(--color-neon-400);
+  color: var(--color-night-950);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--color-neon-500) 30%, transparent);
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.2s ease;
+}
+
+.jugar:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: var(--color-neon-300);
+}
+
+.jugar:focus-visible {
+  outline: 2px solid var(--color-neon-300);
+  outline-offset: 3px;
+}
+
+@media (max-width: 479px) {
+  .vista {
+    width: 6rem;
+    height: 4.5rem;
+  }
+
+  .jugar {
+    padding: 0.55rem 1rem;
+  }
+}

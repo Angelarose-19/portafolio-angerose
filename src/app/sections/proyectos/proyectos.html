@@ -1,0 +1,137 @@
+<section
+  id="proyectos"
+  class="relative overflow-hidden bg-linear-to-b from-night-700 via-night-800 to-night-900 px-4 py-24 sm:px-8"
+>
+  <div class="mx-auto max-w-7xl">
+    <!-- Título -->
+    <h2 class="font-display text-6xl text-neon-400 sm:text-7xl" data-reveal>
+      Mis Proyectos <span class="text-4xl text-neon-300" aria-hidden="true">✦</span>
+    </h2>
+    <span class="mt-2 block h-0.5 w-28 rounded-full bg-neon-400/70" aria-hidden="true"></span>
+
+    <!-- Móvil: carrusel. Tablet y escritorio: cuadrícula. -->
+    <ul
+      #pista
+      class="pista mt-12"
+      aria-label="Lista de proyectos"
+      data-reveal
+      (scroll)="alDeslizar()"
+    >
+      @for (p of proyectos; track p.nombre) {
+        <li class="item">
+          <article class="tarjeta">
+            <!-- Barra de la "ventana de navegador" -->
+            <div class="barra" aria-hidden="true">
+              <span class="punto bg-neon-500"></span>
+              <span class="punto bg-neon-300"></span>
+              <span class="punto bg-violet-400"></span>
+            </div>
+
+            <div class="captura">
+              <img
+                [src]="p.imagen"
+                [alt]="p.alt"
+                width="1400"
+                height="875"
+                loading="lazy"
+                decoding="async"
+                [style.object-position]="p.posicion ?? 'center'"
+              />
+            </div>
+
+            <div class="flex flex-1 flex-col p-5">
+              <h3 class="text-xl font-bold text-neon-200">{{ p.nombre }}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-neon-200/85">{{ p.descripcion }}</p>
+
+              <ul class="mt-4 flex flex-wrap gap-2" aria-label="Tecnologías usadas">
+                @for (t of p.tecnologias; track t) {
+                  <li class="etiqueta">{{ t }}</li>
+                }
+              </ul>
+
+              @if (p.enlace || p.codigo) {
+                <div class="mt-auto flex flex-wrap gap-3 pt-5">
+                  @if (p.enlace) {
+                    <a
+                      class="boton boton-principal"
+                      [href]="p.enlace"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      [attr.aria-label]="'Ver proyecto ' + p.nombre + ' (se abre en una pestaña nueva)'"
+                    >
+                      Ver proyecto
+                      <svg
+                        class="size-4"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M7 17 17 7" />
+                        <path d="M7 7h10v10" />
+                      </svg>
+                    </a>
+                  }
+                  @if (p.codigo) {
+                    <a
+                      class="boton boton-secundario"
+                      [href]="p.codigo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      [attr.aria-label]="'Ver el código de ' + p.nombre + ' (se abre en una pestaña nueva)'"
+                    >
+                      Código
+                    </a>
+                  }
+                </div>
+              }
+            </div>
+          </article>
+        </li>
+      }
+    </ul>
+
+    <!-- Controles del carrusel (solo móvil) -->
+    <div class="mt-4 flex items-center justify-center gap-5 md:hidden">
+      <button
+        type="button"
+        class="flecha"
+        aria-label="Proyecto anterior"
+        [disabled]="activo() === 0"
+        (click)="anterior()"
+      >
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+      </button>
+
+      <div class="flex gap-2">
+        @for (p of proyectos; track p.nombre; let i = $index) {
+          <button
+            type="button"
+            class="indicador"
+            [class.activo]="activo() === i"
+            [attr.aria-label]="'Ir al proyecto ' + (i + 1) + ': ' + p.nombre"
+            [attr.aria-current]="activo() === i ? 'true' : null"
+            (click)="irA(i)"
+          ></button>
+        }
+      </div>
+
+      <button
+        type="button"
+        class="flecha"
+        aria-label="Proyecto siguiente"
+        [disabled]="activo() === proyectos.length - 1"
+        (click)="siguiente()"
+      >
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>

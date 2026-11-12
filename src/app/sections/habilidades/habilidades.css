@@ -1,0 +1,176 @@
+/* ---------- Aparecer al hacer scroll ---------- */
+/* Solo se oculta si el JavaScript está activo (clase puesta desde habilidades.ts). */
+:host(.js-reveal) [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+:host(.js-reveal) [data-reveal].visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Repisa ---------- */
+.repisa {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 1.5rem;
+  margin: 0.75rem 0 0;
+  padding: 0 1rem 1.75rem;
+  list-style: none;
+}
+
+/* Tabla de madera */
+.repisa::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0.9rem;
+  border-radius: 0.3rem;
+  background: linear-gradient(to bottom, #a8566f, #7a3350 55%, #4d1f35);
+  border-top: 1px solid color-mix(in srgb, var(--color-neon-300) 55%, transparent);
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.45),
+    0 0 18px color-mix(in srgb, var(--color-neon-500) 18%, transparent);
+}
+
+/* ---------- Cada habilidad ---------- */
+.habilidad {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 4.75rem;
+  cursor: default;
+}
+
+.icono {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.3s ease;
+}
+
+.icono img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Logos negros (GitHub): se vuelven blancos para verse sobre el fondo oscuro */
+.icono img.invertir {
+  filter: invert(1);
+}
+
+/* Ícono de reemplazo: círculo con la inicial */
+.inicial {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-neon-500), var(--color-violet-400));
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.nombre {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--color-neon-200) 85%, transparent);
+  transition: color 0.2s ease;
+}
+
+/* Sombrita en la repisa que se encoge cuando el ícono salta */
+.sombra {
+  position: absolute;
+  bottom: -1.05rem;
+  left: 50%;
+  width: 2.6rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  filter: blur(3px);
+  transform: translateX(-50%);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* ---------- Animaciones al pasar el puntero (o enfocar con teclado) ---------- */
+.habilidad:hover .icono,
+.habilidad:focus-within .icono {
+  transform: translateY(-0.6rem) rotate(-6deg) scale(1.15);
+  filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--color-neon-500) 55%, transparent));
+}
+
+.habilidad:hover .icono img.invertir {
+  filter: invert(1) drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+}
+
+.habilidad:hover .nombre,
+.habilidad:focus-within .nombre {
+  color: var(--color-neon-400);
+}
+
+.habilidad:hover .sombra,
+.habilidad:focus-within .sombra {
+  transform: translateX(-50%) scale(0.6);
+  opacity: 0.5;
+}
+
+/* Al hacer clic, un pequeño "aplastón" */
+.habilidad:active .icono {
+  transform: translateY(-0.2rem) scale(0.95);
+}
+
+/* ---------- Chips de metodologías ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-neon-400) 60%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-night-900) 60%, transparent);
+  color: var(--color-neon-200);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.2s ease;
+}
+
+.chip:hover {
+  transform: translateY(-3px) scale(1.06);
+  background: color-mix(in srgb, var(--color-neon-500) 25%, transparent);
+}
+
+/* ---------- Móvil: íconos un poco más compactos ---------- */
+@media (max-width: 639px) {
+  .repisa {
+    gap: 1rem 0.75rem;
+    padding-inline: 0.25rem;
+  }
+
+  .habilidad {
+    width: 4.2rem;
+  }
+
+  .icono {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+}

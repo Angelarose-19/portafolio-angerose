@@ -1,0 +1,342 @@
+/* ---------- Escena ---------- */
+.escena {
+  /* Posiciones en % del tamaño de la escena (valores de móvil). */
+  --muneca-x: 27%;
+  --muneca-y: 5%;
+  --muneca-w: 45%;
+
+  --escritorio-top: 47%;
+  --escritorio-bottom: 53%;
+
+  --laptop-x: 35.5%;
+  --laptop-y: 36%;
+  --laptop-w: 26%;
+
+  --taza-x: 26.5%;
+  --taza-y: 40%;
+  --taza-w: 8.5%;
+
+  --gato-x: 66%;
+  --gato-b: 50%;
+  --gato-w: 20%;
+
+  position: relative;
+  margin-inline: auto;
+  width: 100%;
+  aspect-ratio: 1188 / 1324;
+  container-type: inline-size;
+
+  /* Móvil: se difumina solo por abajo, para fundirse con el texto */
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+}
+
+.capa {
+  position: absolute;
+}
+
+.capa-fondo {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.muneca {
+  left: var(--muneca-x);
+  top: var(--muneca-y);
+  width: var(--muneca-w);
+  height: auto;
+}
+
+/* Copia de la habitación mostrando solo la franja del escritorio */
+.escritorio {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: inset(var(--escritorio-top) 0 calc(100% - var(--escritorio-bottom)) 0);
+  pointer-events: none;
+}
+
+.laptop {
+  left: var(--laptop-x);
+  top: var(--laptop-y);
+  width: var(--laptop-w);
+}
+
+.laptop img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.laptop-brillo {
+  position: absolute;
+  left: 36%;
+  top: 47%;
+  width: 30%;
+  height: 45%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(255, 79, 176, 0.6), transparent);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: pulso 3.4s ease-in-out infinite;
+}
+
+.taza {
+  left: var(--taza-x);
+  top: var(--taza-y);
+  width: var(--taza-w);
+  height: auto;
+}
+
+/* ---------- Gato ---------- */
+.gato {
+  left: var(--gato-x);
+  bottom: var(--gato-b);
+  width: var(--gato-w);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gato:focus-visible {
+  outline: 2px solid var(--color-neon-300);
+  outline-offset: 4px;
+  border-radius: 1rem;
+}
+
+.gato-dormido {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 50% 100%;
+  pointer-events: none;
+  animation: respirar 4s ease-in-out infinite;
+}
+
+.gato-feliz {
+  display: block;
+  width: 80%;
+  height: auto;
+  margin-inline: auto;
+  pointer-events: none;
+  animation: saltito 0.5s ease-out;
+}
+
+
+
+.gato-corazon {
+  position: absolute;
+  right: 0;
+  bottom: 75%;
+  width: 16%;
+  height: auto;
+  pointer-events: none;
+  animation: subir 1.8s ease-out forwards;
+}
+
+.gato-globo {
+  position: absolute;
+  left: 50%;
+  bottom: 105%;
+  transform: translateX(-50%);
+  padding: 0.2em 0.7em;
+  border-radius: 999px;
+  background: var(--color-neon-200);
+  color: var(--color-night-900);
+  font-size: clamp(0.7rem, 3.6cqw, 1.4rem);
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: aparecer 0.25s ease-out;
+}
+
+.zzz {
+  position: absolute;
+  right: 6%;
+  top: -22%;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 5cqw, 2rem);
+  color: var(--color-neon-300);
+  pointer-events: none;
+}
+
+.zzz span {
+  position: absolute;
+  opacity: 0;
+  animation: zzz 3.2s ease-in infinite;
+}
+
+.zzz span:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.zzz span:nth-child(3) {
+  animation-delay: 2s;
+}
+
+/* ---------- Destellos ---------- */
+.destello {
+  height: auto;
+  pointer-events: none;
+  animation: titilar 3.6s ease-in-out infinite;
+}
+
+.d1 { left: 35%;   top: 5.7%;  width: 3.5%; }
+.d2 { left: 76.5%; top: 25.6%; width: 3.5%; animation-delay: 1.2s; }
+.d3 { left: 32.7%; top: 13.2%; width: 3.5%; animation-delay: 2.1s; }
+.d4 { left: 71.7%; top: 30.1%; width: 3.5%; animation-delay: 0.6s; }
+
+/* ---------- Gato de neón de la pared ---------- */
+.brillo-neon {
+  left: 74%;
+  top: 8%;
+  width: 15%;
+  height: 19%;
+  background: radial-gradient(closest-side, rgba(255, 79, 176, 0.45), transparent);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: neon 7s linear infinite;
+}
+
+/* ---------- Texto ---------- */
+.titulo-neon {
+  text-shadow:
+    0 0 12px rgba(255, 79, 176, 0.7),
+    0 0 36px rgba(255, 79, 176, 0.35);
+}
+
+/* ---------- Ayuda para ubicar capas ---------- */
+.ayuda::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(0, 255, 255, 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 255, 0.5) 1px, transparent 1px);
+  background-size: 10% 10%;
+}
+
+.ayuda .capa:not(.capa-fondo) {
+  outline: 1px dashed cyan;
+}
+
+/* ---------- Animaciones ---------- */
+@keyframes respirar {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(1.03); }
+}
+
+@keyframes pulso {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; }
+}
+
+@keyframes titilar {
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50%      { opacity: 1;    transform: scale(1.1); }
+}
+
+@keyframes neon {
+  0%, 44%, 54%, 100% { opacity: 0.6; }
+  46%                { opacity: 0.15; }
+  48%                { opacity: 0.65; }
+  50%                { opacity: 0.2; }
+  52%                { opacity: 0.6; }
+}
+
+@keyframes zzz {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.7); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(40%, -140%) scale(1.3); }
+}
+
+@keyframes subir {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-120%) scale(1.1); }
+}
+
+@keyframes saltito {
+  0%   { transform: translateX(-50%) translateY(0); }
+  40%  { transform: translateX(-50%) translateY(-12%); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zzz span {
+    opacity: 0.9;
+    animation: none;
+  }
+
+  .zzz span:nth-child(1) { left: 0;     top: 0; }
+  .zzz span:nth-child(2) { left: 0.7em; top: -0.8em; }
+  .zzz span:nth-child(3) { left: 1.4em; top: -1.6em; }
+}
+
+/* =====================================================================
+   ESCRITORIO: habitación ancha (16:9). Las posiciones son % de la imagen
+   ancha, así que aquí se ajusta todo lo de escritorio.
+   ===================================================================== */
+@media (min-width: 1024px) {
+  .escena {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+
+    --muneca-x: 52%;
+    --muneca-y: 7%;
+    --muneca-w: 24%;
+
+    --escritorio-top: 49%;
+    --escritorio-bottom: 55%;
+
+    --laptop-x: 55.5%;
+    --laptop-y: 37.7%;
+    --laptop-w: 14.5%;
+
+    --taza-x: 49.5%;
+    --taza-y: 41.3%;
+    --taza-w: 5.5%;
+
+    --gato-x: 72%;
+    --gato-b: 47.5%;
+    --gato-w: 12.5%;
+
+    /* Solo se funden los bordes, por si la pantalla es más ancha que 16:9 */
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  /* Destellos sobre las estrellitas dibujadas en la pared */
+  .d1 { left: 48.3%; top: 20.8%; width: 2.5%; }
+  .d2 { left: 80.5%; top: 30.8%; width: 2.5%; }
+  .d3 { left: 51.3%; top: 27.9%; width: 2.5%; }
+  .d4 { left: 56.8%; top: 37.1%; width: 2.5%; }
+
+  /* Gato de neón de la pared */
+  .brillo-neon {
+    left: 80.5%;
+    top: 6%;
+    width: 10.5%;
+    height: 24%;
+  }
+}

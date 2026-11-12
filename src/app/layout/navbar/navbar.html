@@ -1,0 +1,140 @@
+<!-- Iconos reutilizables (SVG, toman el color del texto) -->
+<ng-template #icon let-name>
+  <svg
+    class="size-5 shrink-0"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    @switch (name) {
+      @case ('home') {
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      }
+      @case ('user') {
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      }
+      @case ('folder') {
+        <path
+          d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+        />
+      }
+      @case ('settings') {
+        <path
+          d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+        />
+        <circle cx="12" cy="12" r="3" />
+      }
+      @case ('mail') {
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+      }
+    }
+  </svg>
+</ng-template>
+
+<header
+  class="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-colors duration-300"
+  [class]="scrolled() || menuOpen() ? 'bg-night-950/85 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none' : ''"
+>
+  <!-- Fondo invisible: al tocar fuera del menú móvil, se cierra -->
+  @if (menuOpen()) {
+    <button
+      type="button"
+      class="fixed inset-0 -z-10 cursor-default lg:hidden"
+      aria-label="Cerrar menú"
+      tabindex="-1"
+      (click)="closeMenu()"
+    ></button>
+  }
+
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+    <!-- Logo -->
+    <a
+      href="#inicio"
+      class="flex items-center gap-2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neon-400"
+      aria-label="Ange Rose, ir al inicio"
+      (click)="go($event, 'inicio')"
+    >
+      <span class="text-xl font-bold text-neon-400" aria-hidden="true">&lt;/&gt;</span>
+      <span class="font-display text-3xl leading-none text-neon-200">Ange Rose</span>
+      <span class="text-neon-400" aria-hidden="true">♡</span>
+    </a>
+
+    <!-- Menú de escritorio -->
+    <nav
+      aria-label="Principal"
+      class="hidden items-center gap-1 rounded-full border border-neon-400/60 px-2 py-2 transition-colors duration-300 lg:flex"
+      [class]="scrolled() ? 'bg-night-950/85 shadow-lg shadow-neon-500/10 backdrop-blur-md' : 'bg-night-900/50 backdrop-blur-sm'"
+    >
+      @for (link of links; track link.id) {
+        <a
+          [href]="'#' + link.id"
+          class="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-neon-300"
+          [class]="activeId() === link.id ? 'bg-neon-400 text-night-950' : 'text-neon-200 hover:text-neon-400'"
+          [attr.aria-current]="activeId() === link.id ? 'true' : null"
+          (click)="go($event, link.id)"
+        >
+          <ng-container *ngTemplateOutlet="icon; context: { $implicit: link.icon }" />
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <!-- Botón hamburguesa (móvil y tablet) -->
+    <button
+      type="button"
+      class="grid size-11 cursor-pointer place-items-center rounded-full border border-neon-400/60 text-neon-200 transition-colors hover:text-neon-400 focus-visible:outline-2 focus-visible:outline-neon-300 lg:hidden"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="menu-movil"
+      [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
+      (click)="toggleMenu()"
+    >
+      <svg
+        class="size-6"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        @if (menuOpen()) {
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        } @else {
+          <path d="M4 6h16" />
+          <path d="M4 12h16" />
+          <path d="M4 18h16" />
+        }
+      </svg>
+    </button>
+  </div>
+
+  <!-- Panel móvil -->
+  @if (menuOpen()) {
+    <nav
+      id="menu-movil"
+      aria-label="Principal"
+      class="mx-4 mb-3 flex flex-col gap-1 rounded-3xl border border-neon-400/40 bg-night-900/95 p-2 shadow-lg shadow-neon-500/10 backdrop-blur-md sm:mx-6 lg:hidden"
+    >
+      @for (link of links; track link.id) {
+        <a
+          [href]="'#' + link.id"
+          class="flex min-h-12 items-center gap-3 rounded-2xl px-4 text-base font-semibold transition-colors"
+          [class]="activeId() === link.id ? 'bg-neon-400 text-night-950' : 'text-neon-200 active:bg-night-700'"
+          [attr.aria-current]="activeId() === link.id ? 'true' : null"
+          (click)="go($event, link.id)"
+        >
+          <ng-container *ngTemplateOutlet="icon; context: { $implicit: link.icon }" />
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+  }
+</header>

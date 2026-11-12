@@ -1,0 +1,152 @@
+<section
+  id="inicio"
+  class="relative flex min-h-svh items-center overflow-hidden px-4 pb-12 sm:px-8 lg:p-0"
+>
+  <!-- Fondo: la habitación agrandada y desenfocada (solo escritorio) -->
+  <div class="pointer-events-none absolute inset-0 -z-10 hidden lg:block" aria-hidden="true">
+    <img
+      src="images/escena/habitacion-ancha.webp"
+      alt=""
+      loading="lazy"
+      class="size-full scale-125 object-cover opacity-70 blur-2xl"
+    />
+    <div class="absolute inset-0 bg-night-950/60"></div>
+    <!-- Se funde con la sección siguiente -->
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-linear-to-b from-transparent to-night-950"></div>
+  </div>
+
+  <div
+    class="mx-auto grid w-full max-w-7xl items-center gap-8 lg:relative lg:block lg:aspect-[1672/941] lg:w-[min(100%,calc(100svh*1672/941))] lg:max-w-none"
+  >
+    <!-- ============ Texto ============ -->
+    <div
+      class="text-center lg:absolute lg:top-1/2 lg:left-[12%] lg:z-10 lg:w-[38%] lg:-translate-y-1/2 lg:text-left lg:[text-shadow:0_2px_14px_rgba(18,6,31,0.9)]"
+    >
+      <p class="font-display text-4xl text-white sm:text-5xl">
+        Hola, soy <span class="text-neon-400" aria-hidden="true">♡</span>
+      </p>
+
+      <h1
+        class="titulo-neon font-display text-7xl leading-[0.95] text-neon-400 sm:text-8xl xl:text-9xl"
+      >
+        Angela
+      </h1>
+
+      <p
+        class="mt-4 flex items-center justify-center gap-3 text-xl font-semibold text-neon-200 lg:justify-start"
+      >
+        <span class="h-px w-8 bg-neon-400/60" aria-hidden="true"></span>
+        Desarrolladora Web
+        <span class="h-px w-8 bg-neon-400/60" aria-hidden="true"></span>
+      </p>
+
+      <p class="mx-auto mt-5 max-w-md text-lg text-neon-200/90 lg:mx-0">
+        Creo soluciones digitales con código, creatividad y mucha pasión. ♡
+      </p>
+
+      <a
+        href="#sobre-mi"
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-neon-400 px-7 py-3 font-semibold text-night-950 shadow-lg shadow-neon-500/30 transition hover:bg-neon-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neon-300 lg:[text-shadow:none]"
+      >
+        Explora mi mundo
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14" />
+          <path d="m19 12-7 7-7-7" />
+        </svg>
+      </a>
+
+      <!-- Nota adhesiva -->
+      <aside
+        class="mx-auto mt-10 max-w-xs -rotate-2 rounded-sm bg-neon-200 p-5 text-left text-night-900 shadow-lg shadow-black/40 lg:mx-0 lg:max-xl:hidden lg:[text-shadow:none]"
+      >
+        <p class="font-hand text-2xl font-bold">Un poco sobre mí… ♡</p>
+        <p class="mt-1 font-hand text-xl leading-snug">
+          Apasionada por la tecnología, el diseño y aprender siempre algo nuevo.
+        </p>
+        <a
+          href="#sobre-mi"
+          class="mt-3 inline-flex rounded-full bg-neon-400 px-4 py-1.5 text-sm font-semibold text-night-950 transition hover:bg-neon-300"
+        >
+          Conoce más →
+        </a>
+      </aside>
+    </div>
+
+    <!-- ============ Escena ============ -->
+    <div class="order-first -mx-4 sm:-mx-8 lg:absolute lg:inset-0 lg:order-last lg:mx-0">
+      <div class="escena" [class.ayuda]="ayuda">
+        <!-- 1. Habitación (vertical en móvil, ancha en escritorio) -->
+        <picture>
+          <source media="(min-width: 1024px)" srcset="images/escena/habitacion-ancha.webp" />
+          <img
+            class="capa capa-fondo"
+            src="images/escena/habitacion.webp"
+            alt=""
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+
+        <!-- Brillo parpadeante del gato de neón de la pared -->
+        <div class="capa brillo-neon" aria-hidden="true"></div>
+
+        <!-- 2. Destellos -->
+        <img class="capa destello d1" src="images/efectos/destello-1.webp" alt="" />
+        <img class="capa destello d2" src="images/efectos/destello-2.webp" alt="" />
+        <img class="capa destello d3" src="images/efectos/destello-3.webp" alt="" />
+        <img class="capa destello d4" src="images/efectos/destello-2.webp" alt="" />
+
+        <!-- 3. Muñeca (quieta) -->
+        <img
+          class="capa muneca"
+          src="images/muneca/inicio.webp"
+          alt="Ange Rose apoyando la mejilla en la mano, con expresión soñadora"
+          decoding="async"
+        />
+
+        <!-- 4. Borde del escritorio: tapa la cintura de la muñeca -->
+        <picture>
+          <source media="(min-width: 1024px)" srcset="images/escena/habitacion-ancha.webp" />
+          <img class="capa escritorio" src="images/escena/habitacion.webp" alt="" />
+        </picture>
+
+        <!-- 5. Laptop -->
+        <div class="capa laptop">
+          <img src="images/escena/laptop.webp" alt="" />
+          <span class="laptop-brillo" aria-hidden="true"></span>
+        </div>
+
+        <!-- 6. Taza -->
+        <img class="capa taza" src="images/escena/taza.webp" alt="" />
+
+        <!-- 7. Gato -->
+         <button
+          type="button"
+          class="capa gato"
+          aria-label="Acariciar al gatito"
+          (click)="acariciarGato()"
+        >
+          @if (gatoDespierto()) {
+            <img class="gato-feliz" src="images/gato/feliz.webp" alt="" />
+            <img class="gato-corazon" src="images/efectos/corazon-gato.webp" alt="" />
+            <span class="gato-globo" aria-hidden="true">{{ mensaje() }}</span>
+          } @else {
+            <img
+              class="gato-dormido"
+              src="images/gato/dormido.webp"
+              alt="Gatito blanco con manchas durmiendo sobre el escritorio"
+            />
+            <span class="zzz" aria-hidden="true">
+              <span>z</span><span>z</span><span>z</span>
+            </span>
+          }
+        </button>
